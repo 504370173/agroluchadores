@@ -1,15 +1,21 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateProductDto {
-    @IsNotEmpty() name: string; 
+  readonly id: number;
 
-    @IsNotEmpty() amount: number; //isNumber()
+  @IsNotEmpty() readonly name: string;
 
-    @IsNotEmpty() measure: string; 
+  @IsNotEmpty() readonly amount: number;
 
-    @IsNotEmpty() season: string; 
+  @IsNotEmpty() readonly measure: string;
 
-    @IsNotEmpty() categoryId: number; 
+  @IsNotEmpty() readonly season: string;
 
-    // @IsNotEmpty() seasonId: number; 
+  @IsNotEmpty() readonly categoryId: number;
+
+  @IsNotEmpty() readonly stock: number;
+
+  @IsNotEmpty() readonly location: number;
+
+  @IsNotEmpty() readonly status: boolean;
 }

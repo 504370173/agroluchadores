@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfigAsync } from './database/database.config';
@@ -12,14 +11,17 @@ import { SuppliersModule } from './suppliers/suppliers.module';
 import { SuppliesModule } from './supplies/supplies.module';
 import { ToolsModule } from './tools/tools.module';
 import { ClientsModule } from './clients/clients.module';
-// import { SeasonsModule } from './seasons/seasons.module';
-
+import { LocationsModule } from './locations/locations.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true, expandVariables: true,
-  }),
-  TypeOrmModule.forRootAsync(typeOrmConfigAsync),
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      expandVariables: true,
+    }),
+    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     ProductsModule,
     AuthModule,
     OrdersModule,
@@ -28,16 +30,17 @@ import { ClientsModule } from './clients/clients.module';
     SuppliersModule,
     SuppliesModule,
     ToolsModule,
-    ClientsModule
-    // SeasonsModule
+    ClientsModule,
+    LocationsModule,
+    InventoryModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
-
 export class AppModule {
   static port: number;
   constructor(private readonly configService: ConfigService) {
-    AppModule.port = +this.configService.get("PORT");
+    AppModule.port = +this.configService.get('PORT');
   }
 }
